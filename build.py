@@ -9,7 +9,7 @@ canpass-training-site/build.py を踏襲。
 再生成: python3 build.py
 前提: soffice / PyMuPDF(fitz) 利用可。
 """
-import os, glob, subprocess, fitz
+import os, glob, subprocess, hashlib, fitz
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PJ = os.path.dirname(ROOT)
@@ -78,9 +78,9 @@ body{{background:var(--bg);font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',s
 <span style="color:#5d7088">{title}</span>
 </div></div>
 <script>
-var N={n},i=0,dir="assets/{key}/";
+var N={n},i=0,dir="assets/{key}/",ver="{ver}";
 function pad(x){{return (x<10?'0':'')+x}}
-function show(){{document.getElementById('slide').src=dir+pad(i+1)+'.jpg';document.getElementById('count').textContent=(i+1)+' / '+N}}
+function show(){{document.getElementById('slide').src=dir+pad(i+1)+'.jpg?v='+ver;document.getElementById('count').textContent=(i+1)+' / '+N}}
 function go(d){{i=Math.max(0,Math.min(N-1,i+d));show()}}
 function open_(){{document.getElementById('gate').style.display='none';document.getElementById('app').style.display='flex';show()}}
 function unlock(e){{e.preventDefault();if(document.getElementById('pw').value==='{password}'){{sessionStorage.setItem('ak_ok','1');open_()}}else{{document.getElementById('err').textContent='パスワードが違います'}}return false}}
@@ -131,9 +131,10 @@ if(sessionStorage.getItem('ak_ok')==='1'){{document.getElementById('gate').style
 def main():
     ensure_pdf()
     n = render()
+    ver = hashlib.md5(open(PPTX, "rb").read()).hexdigest()[:8]  # 内容が変わるとURLも変わりキャッシュを回避
     with open(os.path.join(ROOT, "deck.html"), "w", encoding="utf-8") as f:
         f.write(DECK_HTML.format(title=DECK["title"], note=DECK["note"], n=n,
-                                 key=DECK["key"], password=PASSWORD))
+                                 key=DECK["key"], password=PASSWORD, ver=ver))
     with open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8") as f:
         f.write(INDEX_HTML.format(password=PASSWORD))
     with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8") as f:

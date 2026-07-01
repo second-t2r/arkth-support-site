@@ -31,9 +31,9 @@ body{background:var(--bg);font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sa
 <span style="color:#5d7088">Arkth 幹部代行サポート 仮案＋競合に勝つ戦略</span>
 </div></div>
 <script>
-var N=15,i=0,dir="assets/deck/";
+var N=15,i=0,dir="assets/deck/",ver="1cdcac16";
 function pad(x){return (x<10?'0':'')+x}
-function show(){document.getElementById('slide').src=dir+pad(i+1)+'.jpg';document.getElementById('count').textContent=(i+1)+' / '+N}
+function show(){document.getElementById('slide').src=dir+pad(i+1)+'.jpg?v='+ver;document.getElementById('count').textContent=(i+1)+' / '+N}
 function go(d){i=Math.max(0,Math.min(N-1,i+d));show()}
 function open_(){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='flex';show()}
 function unlock(e){e.preventDefault();if(document.getElementById('pw').value==='Arkth'){sessionStorage.setItem('ak_ok','1');open_()}else{document.getElementById('err').textContent='パスワードが違います'}return false}
