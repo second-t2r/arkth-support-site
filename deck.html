@@ -1,0 +1,43 @@
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Arkth 幹部代行サポート 仮案＋競合に勝つ戦略</title>
+<style>
+:root{--bg:#0b1426;--ink:#14213a;--muted:#6b7c92;--line:#d6e0ec;--accent:#2e6be6}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:var(--bg);font-family:'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;color:#fff;overflow:hidden}
+#gate{position:fixed;inset:0;background:#0b1426;display:flex;align-items:center;justify-content:center;z-index:10}
+#gate .box{background:#fff;color:var(--ink);padding:28px 26px;border-radius:14px;max-width:340px;width:88%;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+#gate h1{font-size:18px;margin:0 0 4px}#gate p{font-size:12px;color:var(--muted);margin:0 0 16px;line-height:1.6}
+#gate input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:15px;margin-bottom:10px}
+#gate button{width:100%;padding:11px;border:0;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;cursor:pointer}
+#gate .err{color:#b23b3b;font-size:12px;height:14px;margin-top:6px}
+#app{display:none;height:100%;flex-direction:column}
+#stage{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:14px}
+#stage img{max-width:100%;max-height:100%;border-radius:6px;box-shadow:0 6px 30px rgba(0,0,0,.5)}
+#bar{display:flex;align-items:center;justify-content:center;gap:18px;padding:8px 14px;background:#070f1d;font-size:13px;color:#9fb1c8}
+#bar button{background:#1c3257;color:#fff;border:0;border-radius:6px;padding:7px 14px;font-size:14px;cursor:pointer}
+#bar a{color:#9fb1c8;text-decoration:none;font-size:12px}
+#count{min-width:64px;text-align:center}
+</style></head><body>
+<div id="gate"><form class="box" onsubmit="return unlock(event)">
+<h1>Arkth サポート資料</h1><p>新屋さん限定・議論用たたき台（最終版ではない）<br>閲覧パスワードを入力してください</p>
+<input id="pw" type="password" autocomplete="off" placeholder="パスワード" autofocus>
+<button type="submit">開く</button><div class="err" id="err"></div></form></div>
+<div id="app">
+<div id="stage"><img id="slide" alt="slide"></div>
+<div id="bar">
+<a href="./index.html">&#8592; 一覧</a>
+<button onclick="go(-1)">&#8249; 前</button><span id="count"></span><button onclick="go(1)">次 &#8250;</button>
+<span style="color:#5d7088">Arkth 幹部代行サポート 仮案＋競合に勝つ戦略</span>
+</div></div>
+<script>
+var N=15,i=0,dir="assets/deck/";
+function pad(x){return (x<10?'0':'')+x}
+function show(){document.getElementById('slide').src=dir+pad(i+1)+'.jpg';document.getElementById('count').textContent=(i+1)+' / '+N}
+function go(d){i=Math.max(0,Math.min(N-1,i+d));show()}
+function open_(){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='flex';show()}
+function unlock(e){e.preventDefault();if(document.getElementById('pw').value==='arkth2026'){sessionStorage.setItem('ak_ok','1');open_()}else{document.getElementById('err').textContent='パスワードが違います'}return false}
+if(sessionStorage.getItem('ak_ok')==='1'){open_()}
+document.addEventListener('keydown',function(e){if(document.getElementById('app').style.display==='none')return;if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
+document.getElementById('stage').addEventListener('click',function(){go(1)});
+</script></body></html>
