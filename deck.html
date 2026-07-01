@@ -36,7 +36,7 @@ function pad(x){return (x<10?'0':'')+x}
 function show(){document.getElementById('slide').src=dir+pad(i+1)+'.jpg';document.getElementById('count').textContent=(i+1)+' / '+N}
 function go(d){i=Math.max(0,Math.min(N-1,i+d));show()}
 function open_(){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='flex';show()}
-function unlock(e){e.preventDefault();if(document.getElementById('pw').value==='arkth2026'){sessionStorage.setItem('ak_ok','1');open_()}else{document.getElementById('err').textContent='パスワードが違います'}return false}
+function unlock(e){e.preventDefault();if(document.getElementById('pw').value==='Arkth'){sessionStorage.setItem('ak_ok','1');open_()}else{document.getElementById('err').textContent='パスワードが違います'}return false}
 if(sessionStorage.getItem('ak_ok')==='1'){open_()}
 document.addEventListener('keydown',function(e){if(document.getElementById('app').style.display==='none')return;if(e.key==='ArrowRight'||e.key===' ')go(1);if(e.key==='ArrowLeft')go(-1)});
 document.getElementById('stage').addEventListener('click',function(){go(1)});

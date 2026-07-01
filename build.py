@@ -16,7 +16,7 @@ PJ = os.path.dirname(ROOT)
 PPTX = os.path.join(PJ, "slide", "20260701_arkth-support-and-strategy_v1.pptx")
 INTER = os.path.join(PJ, "intermediate")
 PDF = os.path.join(INTER, "20260701_arkth-support-and-strategy_v1.pdf")
-PASSWORD = "arkth2026"  # 軽いゲート（限定URL+noindexと併用）。真のアクセス制御ではない。
+PASSWORD = "Arkth"  # 軽いゲート（限定URL+noindexと併用）。真のアクセス制御ではない。
 
 DECK = {"key": "deck",
         "title": "Arkth 幹部代行サポート 仮案＋競合に勝つ戦略",
